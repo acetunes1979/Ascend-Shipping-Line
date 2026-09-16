@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ascend-navy: #0B2545;
+  --color-ascend-navy-light: #0F2C52;
+  --color-ascend-ocean-start: #1565C0;
+  --color-ascend-ocean-end: #29ABE2;
+  --color-ascend-grey: #8A99A8;
+  --color-ascend-bg: #F7F9FB;
+  --color-ascend-accent: #4FC3F7;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-ascend-bg text-ascend-navy antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+}
+
+/* Lenis recommended styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
