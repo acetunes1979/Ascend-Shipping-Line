@@ -54,7 +54,10 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-4 group">
-            <img src="/logo.png" alt="Ascend Shipping Line Logo" className="h-[3.75rem] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" />
+            <picture>
+              <source srcSet="/logo.webp" type="image/webp" />
+              <img src="/logo.png" alt="Ascend Shipping Line Logo" width="160" height="60" className="h-[3.75rem] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" />
+            </picture>
             <div className="flex flex-col justify-center w-fit">
               <div className={cn(
                 "font-heading font-black text-3xl leading-none scale-y-[0.75] origin-bottom whitespace-nowrap transition-all duration-300",

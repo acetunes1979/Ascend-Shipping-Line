@@ -6,35 +6,40 @@ import { CtaSection } from '../components/CtaSection';
 
 const SLIDES = [
   {
-    image: "/Gemini_Generated_Image_o0yjyfo0yjyfo0yj.jpeg",
+    webp: "/hero-1.webp",
+    fallback: "/Gemini_Generated_Image_o0yjyfo0yjyfo0yj.jpeg",
     subtitle: "The Shipping & Logistics Subsidiary of Ascend International (Pvt) Ltd",
     titleLine1: "Your Trusted Partner in",
     titleLine2: "Global Logistics",
     description: "Specialists in Transshipments & Global Freight Solutions"
   },
   {
-    image: "/freight-knowledge.jpeg",
+    webp: "/hero-2.webp",
+    fallback: "/freight-knowledge.jpeg",
     subtitle: "Industry Leading Expertise",
     titleLine1: "Mastering the Complexities of",
     titleLine2: "Freight Forwarding",
     description: "Delivering knowledge-driven solutions for your supply chain"
   },
   {
-    image: "/industry-updates.png",
+    webp: "/hero-3.webp",
+    fallback: "/industry-updates.png",
     subtitle: "Stay Ahead of the Curve",
     titleLine1: "Real-Time Intelligence &",
     titleLine2: "Industry Updates",
     description: "Navigating global markets with accurate, timely insights"
   },
   {
-    image: "/client-solutions.png",
+    webp: "/hero-4.webp",
+    fallback: "/client-solutions.png",
     subtitle: "Tailored to Your Needs",
     titleLine1: "Customized & Scalable",
     titleLine2: "Client Solutions",
     description: "Adapting to your unique business requirements with precision"
   },
   {
-    image: "/corporate-growth.png",
+    webp: "/hero-5.webp",
+    fallback: "/corporate-growth.png",
     subtitle: "Driving Business Forward",
     titleLine1: "Empowering Your",
     titleLine2: "Corporate Growth",
@@ -52,6 +57,13 @@ export function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  // Preload the next slide image in background for seamless transitions
+  useEffect(() => {
+    const nextIndex = (currentSlide + 1) % SLIDES.length;
+    const img = new Image();
+    img.src = SLIDES[nextIndex].webp;
+  }, [currentSlide]);
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -60,7 +72,7 @@ export function Home() {
         <div className="absolute inset-0 z-0 bg-ascend-navy">
           {SLIDES.map((slide, index) => (
             <div 
-              key={slide.image}
+              key={slide.webp}
               className="absolute inset-0 w-full h-full"
               style={{
                 opacity: index === currentSlide ? 1 : 0,
@@ -68,15 +80,21 @@ export function Home() {
                 zIndex: index === currentSlide ? 1 : 0
               }}
             >
-              <img 
-                src={slide.image}
-                alt={`Logistics background ${index + 1}`}
-                className="w-full h-full object-cover"
-                style={{
-                  transform: index === currentSlide ? 'scale(1.05)' : 'scale(1)',
-                  transition: 'transform 5s ease-out'
-                }}
-              />
+              <picture>
+                <source srcSet={slide.webp} type="image/webp" />
+                <img 
+                  src={slide.fallback}
+                  alt={`Logistics background ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  {...(index === 0 ? { fetchPriority: "high" } : {})}
+                  style={{
+                    transform: index === currentSlide ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'transform 5s ease-out'
+                  }}
+                />
+              </picture>
             </div>
           ))}
           <div className="absolute inset-0 z-10 bg-ascend-navy/80 mix-blend-multiply" />
@@ -162,7 +180,7 @@ export function Home() {
               className="group rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
             >
               <div className="h-48 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=2070&auto=format&fit=crop" alt="Ocean Freight" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=800&auto=format&fit=crop" alt="Ocean Freight" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute top-4 left-4 w-12 h-12 bg-white rounded shadow flex items-center justify-center text-ascend-ocean-start">
                   <Ship className="w-6 h-6" />
                 </div>
@@ -186,7 +204,7 @@ export function Home() {
               className="group rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
             >
               <div className="h-48 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop" alt="Air Freight" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop" alt="Air Freight" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute top-4 left-4 w-12 h-12 bg-white rounded shadow flex items-center justify-center text-ascend-ocean-start">
                   <Plane className="w-6 h-6" />
                 </div>
@@ -211,7 +229,7 @@ export function Home() {
             >
               
               <div className="h-48 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2940&auto=format&fit=crop" alt="Transshipment" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop" alt="Transshipment" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute top-4 left-4 w-12 h-12 bg-white rounded shadow flex items-center justify-center text-ascend-ocean-start">
                   <Container className="w-6 h-6" />
                 </div>
@@ -299,8 +317,10 @@ export function Home() {
               className="relative h-[420px] lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl"
             >
               <img 
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop" 
                 alt="Corporate Logistics Strategy" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </motion.div>

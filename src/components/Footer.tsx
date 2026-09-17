@@ -9,7 +9,10 @@ export function Footer() {
           {/* Brand Col */}
           <div className="space-y-6">
             <Link to="/" className="inline-flex items-center space-x-4 group w-fit">
-              <img src="/logo.png" alt="Ascend Shipping Line Logo" className="h-[3.75rem] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" />
+              <picture>
+                <source srcSet="/logo.webp" type="image/webp" />
+                <img src="/logo.png" alt="Ascend Shipping Line Logo" width="160" height="60" className="h-[3.75rem] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" loading="lazy" />
+              </picture>
               <div className="flex flex-col justify-center text-white w-fit">
                 <div className="font-heading font-black text-3xl leading-none scale-y-[0.75] origin-bottom whitespace-nowrap">
                   <span className="tracking-[0.22em]">ASCEN</span><span>D</span>
